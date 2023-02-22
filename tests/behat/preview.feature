@@ -1,6 +1,6 @@
 @editor @editor_tiny @tiny @tiny_preview @_bug_phantomjs
 Feature: Tiny preview editor button
-  In order to use filters creatively 
+  In order to use filters creatively
   I need to see what text is will look like when saved
 
   Background:
