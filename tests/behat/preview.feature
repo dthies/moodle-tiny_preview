@@ -10,6 +10,7 @@ Feature: Tiny preview editor button
     And I follow "Expand all"
     And I set the field "Address" to "No. 10 Downing"
     And I set the field "Description" to "Wink ;-) emoticon"
+    And I wait "3" seconds
 
   @javascript @tiny_preview_content
   Scenario: Click preview look for image contents
