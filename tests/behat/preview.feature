@@ -8,6 +8,8 @@ Feature: Tiny preview editor button
     And I log in as "admin"
     And I open my profile in edit mode
     And I set the field "Description" to "Wink ;-) emoticon"
+    And I follow "Expand all"
+    And I set the field "Address" to "No. 10 Downing"
 
   @javascript @tiny_preview_content
   Scenario: Click preview look for image contents
