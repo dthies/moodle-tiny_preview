@@ -50,7 +50,7 @@ class filter extends external_api {
     public static function execute_parameters(): external_function_parameters {
         return new external_function_parameters([
             'contextid' => new external_value(PARAM_INT, 'The context ID', VALUE_REQUIRED),
-            'content' => new external_value(PARAM_RAW, 'The editor content', VALUE_REQUIRED)
+            'content' => new external_value(PARAM_RAW, 'The editor content', VALUE_REQUIRED),
         ]);
     }
 
@@ -65,16 +65,16 @@ class filter extends external_api {
     public static function execute(int $contextid, string $content): array {
         [
             'contextid' => $contextid,
-            'content' => $content
+            'content' => $content,
         ] = self::validate_parameters(self::execute_parameters(), [
             'contextid' => $contextid,
-            'content' => $content
+            'content' => $content,
         ]);
 
         $context = context::instance_by_id($contextid);
         self::validate_context($context);
 
-        $result = format_text($content, FORMAT_HTML, array('context' => $context));
+        $result = format_text($content, FORMAT_HTML, ['context' => $context]);
         $result = preg_replace('/brokenfile.php#/', 'draftfile.php', $result);
 
         return [

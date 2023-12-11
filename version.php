@@ -26,7 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'tiny_preview';
 $plugin->incompatible = 402;
-$plugin->release = '1.0';
-$plugin->version = 2023010103;
+$plugin->release = '1.0.2';
+$plugin->version = 2023010104;
 $plugin->requires = 2022112800;
 $plugin->maturity = MATURITY_STABLE;

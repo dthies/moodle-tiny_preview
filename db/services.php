@@ -30,6 +30,6 @@ $functions = [
         'methodname' => 'execute',
         'description' => 'Filter the preview',
         'type' => 'read',
-        'ajax' => true
+        'ajax' => true,
     ],
 ];

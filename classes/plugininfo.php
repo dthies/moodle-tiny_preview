@@ -17,6 +17,7 @@
 namespace tiny_preview;
 
 use context;
+use editor_tiny\editor;
 use editor_tiny\plugin;
 use editor_tiny\plugin_with_buttons;
 use editor_tiny\plugin_with_menuitems;
@@ -40,14 +41,14 @@ class plugininfo extends plugin implements
      * @param context $context The context that the editor is used within
      * @param array $options The options passed in when requesting the editor
      * @param array $fpoptions The filepicker options passed in when requesting the editor
-     * @param editor $editor The editor instance in which the plugin is initialised
+     * @param editor|null $editor The editor instance in which the plugin is initialised
      * @return boolean
      */
     public static function is_enabled(
         context $context,
         array $options,
         array $fpoptions,
-        ?\editor_tiny\editor $editor = null
+        ?editor $editor = null
     ): bool {
         // Users must have permission to embed content.
         return has_capability('tiny/preview:view', $context);
@@ -81,14 +82,14 @@ class plugininfo extends plugin implements
      * @param context $context The context that the editor is used within
      * @param array $options The options passed in when requesting the editor
      * @param array $fpoptions The filepicker options passed in when requesting the editor
-     * @param editor $editor The editor instance in which the plugin is initialised
+     * @param editor|null $editor The editor instance in which the plugin is initialised
      * @return array
      */
     public static function get_plugin_configuration_for_context(
         context $context,
         array $options,
         array $fpoptions,
-        ?\editor_tiny\editor $editor = null
+        ?editor $editor = null
     ): array {
         $permissions = [
             'view' => has_capability('tiny/preview:view', $context),
