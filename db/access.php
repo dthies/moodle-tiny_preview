@@ -31,5 +31,5 @@ $capabilities = [
         'archetypes' => [
             'user' => CAP_ALLOW,
         ],
-    ]
+    ],
 ];
