@@ -22,9 +22,8 @@
  */
 
 import Modal from 'tiny_preview/modal';
-import ModalFactory from 'core/modal_factory';
-import {displayException} from 'core/notification';
-import {notifyFilterContentUpdated} from 'core/event';
+import {exception as displayException} from 'core/notification';
+import {notifyFilterContentUpdated} from 'core_filters/events';
 import * as Options from './options';
 import * as TinyPreviewRepository from 'tiny_preview/repository';
 
@@ -53,14 +52,27 @@ const getTemplateContext = (editor, data) => {
 };
 
 const displayDialogue = async(editor, data = {}) => {
-    const modal = await ModalFactory.create({
-        type: Modal.TYPE,
-        templateContext: await getTemplateContext(editor, data),
-        large: true,
-    }),
+    const modal = await Modal.create({
+            type: Modal.TYPE,
+            templateContext: await getTemplateContext(editor, data),
+            large: true,
+        }),
         $root = await modal.getRoot(),
         root = $root[0];
 
-    modal.show();
+    await modal.show();
+    breakHyperLinks(root);
     notifyFilterContentUpdated(root);
+};
+
+/**
+ * Break hyperlinks in the content to prevent accidental navigation away from editor page.
+ * @param {HTMLElement} element
+ */
+const breakHyperLinks = (element) => {
+    const links = element.querySelectorAll('a:not([target="_blank"])');
+    links.forEach(link => {
+        // Add blank target to link to force open in a new tab.
+        link.setAttribute('target', '_blank');
+    });
 };

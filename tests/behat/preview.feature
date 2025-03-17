@@ -15,3 +15,13 @@ Feature: Tiny preview editor button
     And I wait "3" seconds
     Then I should see "Wink" in the "Preview" "dialogue"
     And "wink" "icon" should exist in the "Preview" "dialogue"
+
+  @javascript @tiny_preview_content
+  Scenario: Check links are forced to open in new window
+    Given I set the field "Description" to "<p><a href=\"https://moodle.org/\">Moodle - Open-source learning platform</a></p>"
+    Then the field "Description" matches value "<p><a href=\"https://moodle.org/\">Moodle - Open-source learning platform</a></p>"
+    Given I expand all toolbars for the "Description" TinyMCE editor
+    When I click on "Preview" "button"
+    And I wait "3" seconds
+    Then I should see "Moodle - Open-source learning platform" in the "Preview" "dialogue"
+    And "a[target='_blank']" "css_element" should exist in the "Preview" "dialogue"
