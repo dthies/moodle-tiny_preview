@@ -22,9 +22,9 @@
  */
 
 import Modal from 'tiny_preview/modal';
-import ModalFactory from 'core/modal_factory';
+import ModalCancel from 'core/modal_cancel';
 import {displayException} from 'core/notification';
-import {notifyFilterContentUpdated} from 'core/event';
+import {notifyFilterContentUpdated} from 'core_filters/events';
 import * as Options from './options';
 import * as TinyPreviewRepository from 'tiny_preview/repository';
 
@@ -53,7 +53,7 @@ const getTemplateContext = (editor, data) => {
 };
 
 const displayDialogue = async(editor, data = {}) => {
-    const modal = await ModalFactory.create({
+    const modal = await ModalCancel.create({
         type: Modal.TYPE,
         templateContext: await getTemplateContext(editor, data),
         large: true,
