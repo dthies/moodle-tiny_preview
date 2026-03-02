@@ -31,6 +31,7 @@ $string['layout'] = 'Page layout';
 $string['layout_desc'] = 'Choose the page layout that works best with the theme and purpose of the site.';
 $string['modaltitle'] = 'Preview';
 $string['pluginname'] = 'Preview';
+$string['preview:use'] = 'Use TinyMCE preview';
 $string['preview:view'] = 'View preview';
 $string['printcontent'] = 'Print contents';
 $string['privacy:metadata'] = 'The Tiny Preview plugin does not store any personal data.';

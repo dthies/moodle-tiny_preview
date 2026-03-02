@@ -22,7 +22,6 @@
  */
 
 import Modal from 'core/modal';
-import ModalRegistry from 'core/modal_registry';
 
 const PreviewModal = class extends Modal {
     static TYPE = 'tiny_preview/modal';
@@ -38,7 +37,5 @@ const PreviewModal = class extends Modal {
         this.registerCloseOnCancel();
     }
 };
-
-ModalRegistry.register(PreviewModal.TYPE, PreviewModal, PreviewModal.TEMPLATE);
 
 export default PreviewModal;
