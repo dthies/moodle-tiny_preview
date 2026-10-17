@@ -63,4 +63,40 @@ final class filter_test extends advanced_testcase {
 
         $this->assertEquals($content, $result['content']);
     }
+
+    #[\PHPUnit\Framework\Attributes\Group('baseline')]
+    /**
+     * A user whose role is denied tiny/preview:view in the context cannot call the service.
+     */
+    public function test_filter_without_view_capability(): void {
+        $this->resetAfterTest();
+        $context = \core\context\course::instance($this->course->id);
+        $studentrole = $this->getDataGenerator()->create_role();
+        role_change_permission($studentrole, $context, 'tiny/preview:view', CAP_PROHIBIT);
+        $this->getDataGenerator()->role_assign($studentrole, $this->student->id, $context->id);
+
+        $this->setUser($this->student);
+
+        $this->expectException(\required_capability_exception::class);
+        filter::execute($context->id, 'cat');
+    }
+
+    #[\PHPUnit\Framework\Attributes\Group('baseline')]
+    /**
+     * Another enrolled user keeps preview access in the same context.
+     */
+    public function test_filter_with_view_capability(): void {
+        $this->resetAfterTest();
+        $context = \core\context\course::instance($this->course->id);
+        $studentrole = $this->getDataGenerator()->create_role();
+        role_change_permission($studentrole, $context, 'tiny/preview:view', CAP_PROHIBIT);
+        $this->getDataGenerator()->role_assign($studentrole, $this->student->id, $context->id);
+        $teacher = $this->getDataGenerator()->create_and_enrol($this->course, 'editingteacher');
+
+        $this->setUser($teacher);
+
+        $result = filter::execute($context->id, 'cat');
+
+        $this->assertEquals('cat', $result['content']);
+    }
 }

@@ -72,6 +72,7 @@ class filter extends external_api {
 
         $context = context::instance_by_id($contextid);
         self::validate_context($context);
+        require_capability('tiny/preview:view', $context);
 
         $result = format_text($content, FORMAT_HTML, ['context' => $context]);
         $result = preg_replace('/brokenfile.php#/', 'draftfile.php', $result);
